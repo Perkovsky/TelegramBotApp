@@ -9,7 +9,7 @@ namespace TelegramBotApp.Models
         #region AppSetting
 
 #if DEBUG
-        private readonly string URL = "https://a8dc9768.ngrok.io";
+        private readonly string URL = "https://70b49923.ngrok.io";
 #else
         private readonly string URL = "https://telegrambotapp20170831072144.azurewebsites.net";
 #endif
