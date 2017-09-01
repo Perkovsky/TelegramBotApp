@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Telegram.Bot;
+﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace TelegramBotApp.Models.Commands
 {
-    public class HelloCommand : Command
+    public class HelloCommand : Command, ICommand
     {
-        public override string Name => "hello";
+        public string Name => "hello";
 
-        public override async void Execute(Message message, TelegramBotClient client)
+        public async void Execute(TelegramBotClient client, Message message, bool replyToMessage = false)
         {
-            var chatId = message.Chat.Id;
-            var messageId = message.MessageId;
-
-            //TODO: Command logic -_-
-            //await client.SendTextMessage(chatId, "Hello!", replyToMessageId: messageId);
-            await client.SendTextMessageAsync(chatId, "hello44! this is test!");
+            string text = $"Привет, {message.From.FirstName} {message.From.LastName}. Тестирование бота...";
+            await SendTextMessageAsync(client, message, text, replyToMessage);
         }
     }
 }

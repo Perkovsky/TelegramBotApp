@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;
 using TelegramBotApp.Models;
+using TelegramBotApp.Models.Commands;
 
 namespace TelegramBotApp.Controllers
 {
+    //TODO: сделать "правильный" route
     //[Route("api/[controller]")]
     public class MessageController : Controller
     {
@@ -21,22 +20,12 @@ namespace TelegramBotApp.Controllers
         //[Route(@"api/message/update")] //webhook uri part
         public async Task<OkResult> Update([FromBody]Update update)
         {
-            var commands = Bot.Commands;
             var message = update.Message;
+            var commands = Bot.Commands;
+            var command = commands.FindCommand(message.Text);
             var client = await Bot.Get();
 
-            var hello = new Models.Commands.HelloCommand();
-            hello.Execute(message, client);
-
-            //foreach (var command in commands)
-            //{
-            //    if (command.Contains(message.Text.ToUpper()))
-            //    {
-            //        command.Execute(message, client);
-            //        //break;
-            //        return Ok();
-            //    }
-            //}
+            command?.Execute(client, message);
 
             return Ok();
         }

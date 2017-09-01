@@ -9,10 +9,21 @@ namespace TelegramBotApp.Models
 {
     public static class Bot
     {
-        private static TelegramBotClient client;
-        private static List<Command> commandsList;
+#if DEBUG
+        public readonly static string URL = "https://285227fd.ngrok.io";
+#else
+        public readonly static string URL = "https://telegrambotapp20170831072144.azurewebsites.net:443";
+#endif
+        //public readonly static string NAME = "NightNinjaBot";
+        public readonly static string ROUTE = "message/update"; // "api/message/update"
+        public readonly static string KEY = "417102442:AAHGx-14uAGiBUXruQvbxn8IO81uoY1H_q0";
 
-        public static IReadOnlyList<Command> Commands => commandsList.AsReadOnly();
+        private static TelegramBotClient client;
+        private static List<ICommand> commandsList;
+
+        //public static IReadOnlyList<ICommand> Commands => commandsList.AsReadOnly();
+
+        internal static IReadOnlyList<ICommand> Commands => commandsList.AsReadOnly();
 
         public static async Task<TelegramBotClient> Get()
         {
@@ -21,13 +32,12 @@ namespace TelegramBotApp.Models
                 return client;
             }
 
-            commandsList = new List<Command>();
+            commandsList = new List<ICommand>();
             commandsList.Add(new HelloCommand());
-            //TODO: Add more commands
+            //TODO: add more commands
 
-            client = new TelegramBotClient(AppSettings.Key);
-            var hook = string.Format(AppSettings.Url, "message/update"); // "api/message/update"
-            await client.SetWebhookAsync(hook);
+            client = new TelegramBotClient(KEY);
+            await client.SetWebhookAsync($"{URL}/{ROUTE}");
 
             return client;
         }
