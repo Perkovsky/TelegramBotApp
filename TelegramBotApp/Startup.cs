@@ -9,10 +9,11 @@ namespace TelegramBotApp
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            BotFactory.GetBot();
             services.AddMvc();
         }
 
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -20,7 +21,6 @@ namespace TelegramBotApp
             }
 
             app.UseMvcWithDefaultRoute();
-            await Bot.Get();
         }
     }
 }

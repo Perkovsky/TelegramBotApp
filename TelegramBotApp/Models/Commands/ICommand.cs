@@ -7,6 +7,6 @@ namespace TelegramBotApp.Models.Commands
     {
         string Name { get; }
 
-        void Execute(TelegramBotClient client, Message message, bool replyToMessage = false);
+        void ExecuteAsync(TelegramBotClient client, Message message, bool replyToMessage = false);
     }
 }
