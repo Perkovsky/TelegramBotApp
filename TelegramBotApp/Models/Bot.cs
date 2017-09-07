@@ -21,7 +21,7 @@ namespace TelegramBotApp.Models
         private List<ICommand> commands;
 
         public TelegramBotClient Client => client;
-        internal IReadOnlyList<ICommand> Commands => commands.AsReadOnly();
+        public IReadOnlyList<ICommand> Commands => commands.AsReadOnly();
 
         public Bot()
         {

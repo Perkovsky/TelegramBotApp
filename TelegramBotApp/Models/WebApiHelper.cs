@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TelegramBotApp.Models
 {
-    internal static class WebApiHelper
+    public static class WebApiHelper
     {
         public static string Get(string url)
         {

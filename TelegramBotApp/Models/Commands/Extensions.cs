@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace TelegramBotApp.Models.Commands
 {
-    internal static class Extensions
+    public static class Extensions
     {
-        internal static ICommand FindCommand(this IReadOnlyCollection<ICommand> commands, string txtCommand)
+        public static ICommand FindCommand(this IReadOnlyCollection<ICommand> commands, string txtCommand)
         {
             return commands.Where(c => c.Name == txtCommand.Trim().ToLower()).FirstOrDefault();
         }
@@ -16,7 +16,7 @@ namespace TelegramBotApp.Models.Commands
         /// <param name="original">Original string</param>
         /// <param name="remove">Characters to Remove</param>
         /// <returns>New string</returns>
-        internal static string TrimExt(this string original, string remove)
+        public static string TrimExt(this string original, string remove)
         {
             return original.Trim(remove.ToCharArray());
         }

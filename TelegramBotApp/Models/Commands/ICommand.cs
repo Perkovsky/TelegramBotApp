@@ -3,7 +3,7 @@ using Telegram.Bot.Types;
 
 namespace TelegramBotApp.Models.Commands
 {
-    interface ICommand
+    public interface ICommand
     {
         string Name { get; }
 
